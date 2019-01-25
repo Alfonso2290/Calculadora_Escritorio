@@ -28,6 +28,17 @@ fondo=Entry(miFrame,state=DISABLED,textvariable=mensaje)
 fondo.grid(row=2,column=1,padx=1,pady=1,columnspan=4)
 
 #---------------------------funciones-------------------
+def deshabilitarOperadores():
+	botonSum.config(state=DISABLED)
+	botonMul.config(state=DISABLED)
+	botonDiv.config(state=DISABLED)
+	botonRes.config(state=DISABLED)
+
+def habilitarOperadores():
+	botonSum.config(state=NORMAL)
+	botonMul.config(state=NORMAL)
+	botonDiv.config(state=NORMAL)
+	botonRes.config(state=NORMAL)
 
 def cantidadPuntosDecimales():
 	texto=valor.get()
@@ -41,7 +52,8 @@ def cantidadPuntosDecimales():
 		return False
 
 def pulsarTeclado(num):
-	
+
+	habilitarOperadores() 
 	if(res.get()==valor.get()):
 		if((valor.get()=="0" or valor.get()=="0.0") and num=="."):
 			valor.set("0")
@@ -113,6 +125,7 @@ def deshabilitarElementos():
 
 def pulsarOperacion(ope):
 	
+	deshabilitarOperadores()
 	numero=float(resFinal.get())
 	numero2=float(valor.get())
 	operacion.set(operacion.get() + valor.get()+ " " +ope)
@@ -138,6 +151,8 @@ def pulsarOperacion(ope):
 	operador.set(ope)
 
 def mostrarResultado(igu):
+
+	habilitarOperadores()
 	num2=float(valor.get())
 	num1=float(resFinal.get())
 	opera=operador.get()
@@ -156,6 +171,7 @@ def mostrarResultado(igu):
 	operacion.set("")
 	operador.set("")
 	res.set(valor.get())
+
 
 #-------------------------fila 1------------------------
 boton7=Button(miFrame,text="7",width=2,command=lambda:pulsarTeclado("7"))
